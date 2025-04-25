@@ -1,9 +1,16 @@
 // routes/garageParts.js
+const fs = require('fs');
+const { promisify } = require('util');
+
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const GaragePart = require('../models/GaragePart');
 const router = express.Router();
+
+const unlinkAsync = promisify(fs.unlink);
+
+
 
 // Configure storage
 const storage = multer.diskStorage({
@@ -41,7 +48,6 @@ router.post('/', upload.single('image'), async (req, res) => {
 router.put('/:id', upload.single('image'), async (req, res) => {
   try {
     const updateData = { ...req.body };
-    
     if (req.file) {
       updateData.imageUrl = `/uploads/${req.file.filename}`;
     }
@@ -72,7 +78,10 @@ router.get('/', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   try {
+    const doc = await GaragePart.findById(req.params.id);
     await GaragePart.findByIdAndDelete(req.params.id);
+    await unlinkAsync("." + doc.imageUrl);
+    
     res.status(200).json({ message: 'Part deleted successfully' });
   } catch (error) {
     res.status(400).json({ error: error.message });
