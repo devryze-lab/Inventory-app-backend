@@ -20,9 +20,12 @@ mongoose.connect(process.env.MONGO_URI)
 
 const garagePartsRoute = require('./routes/garageParts');
 const salesRoute = require('./routes/sales');
+const adminsRoute = require('./routes/admins');
 
 app.use('/api/garage-parts', garagePartsRoute);
 app.use('/api/sales', salesRoute);
+app.use('/api/admins', adminsRoute);
+
 
 app.get('/', (req, res) => {
   res.send('Garage Inventory Backend API');
