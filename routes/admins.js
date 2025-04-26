@@ -14,7 +14,7 @@ router.post("/", async(req,res)=>
         const { name, password } = req.body;
         bycrpt.hash(password,saltRounds, async(err,hash)=>
         {
-            const admindb = await admin.findById('680a8719837324c01f3da700');
+            const admindb = await admin.findById('680c959ddfeac2853ad8d78f');
             // console.log(admindb);
             if(admindb.username == name)
             {
@@ -34,7 +34,7 @@ router.post("/", async(req,res)=>
             //     password:hash
             // });
             // await newadmin.save();
-            
+            // res.status(201).json(1);
         })
     }
     catch(e)
