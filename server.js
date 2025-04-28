@@ -8,8 +8,10 @@ const app = express();
 // Add this before your routes
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-
-// app.use(cors());
+const allowedOrigin = 'http://localhost:5173/';
+app.use(cors(
+  origin: allowedOrigin
+));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
