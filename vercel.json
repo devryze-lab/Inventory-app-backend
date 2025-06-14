@@ -20,13 +20,33 @@
       "dest": "/server.js"
     }
   ],
+  {
+  "version": 2,
+  "builds": [
+    {
+      "src": "./index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/uploads/(.*)",
+      "dest": "/uploads/$1"
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "/index.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.js"
+    }
+  ],
   "functions": {
-    "index.js": {
+    "server.js": {
       "maxDuration": 30
     }
   },
-  "env": {
-    "MONGO_URI": "@mongo_uri",
-    "PORT": "5000"
-  }
+  
+}
 }
