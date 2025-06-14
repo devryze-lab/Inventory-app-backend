@@ -1,3 +1,4 @@
+
 {
   "version": 2,
   "builds": [
@@ -20,33 +21,9 @@
       "dest": "/server.js"
     }
   ],
-  {
-  "version": 2,
-  "builds": [
-    {
-      "src": "./index.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/uploads/(.*)",
-      "dest": "/uploads/$1"
-    },
-    {
-      "src": "/api/(.*)",
-      "dest": "/index.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.js"
-    }
-  ],
   "functions": {
     "server.js": {
       "maxDuration": 30
     }
-  },
-  
-}
+  }
 }
